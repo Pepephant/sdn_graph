@@ -1,15 +1,14 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <vis-network style="height: 100%;"></vis-network>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import VisNetwork from './components/VisNetwork.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    VisNetwork
   }
 }
 </script>
@@ -22,5 +21,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  height: 100vh;
 }
 </style>
