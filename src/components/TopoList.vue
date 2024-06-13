@@ -13,6 +13,7 @@
 
 export default {
     name: 'TopologyList',
+    props: ['nodeData','type'],
     data(){
         return{
             chosen: -1,
@@ -20,6 +21,7 @@ export default {
     },
     methods: {
         seeDetail(e){
+            console.log('this.type', this.type);
             if(this.type){
                 return;
             }
@@ -27,7 +29,6 @@ export default {
             this.chosen = e;
         }
     },
-    props: ['nodeData','type']
 }
 </script>
 
@@ -38,6 +39,8 @@ export default {
     height: 4vh;
     list-style: none;
     position: relative;
+
+    display: flex;
 }
 
 .basicInfoList li:hover{
@@ -46,28 +49,32 @@ export default {
 }
 
 .attrName {
-    position: absolute;
-    display: inline-block;
-    line-height: 4vh;
+    width: 50%;
+    display: block;
+    height: 4vh;
     color: whitesmoke;
     font-size: 15px;
-    left: 3vw;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-left: 1vw;
 }
 
 .attrValue {
-    position: absolute;
-    display: inline-block;
-    line-height: 4vh;
+    width: 40%;
+    display: block;
+    height: 4vh;
     color: rgb(18, 235, 241);
-    left: 12vw;
+    display: flex;
+    justify-content: start;
+    align-items: center;
 }
 
 .colorBlock{
     width: 0.9vh;
     height: 0.9vh;
-    position: absolute;
-    left: 1.6vw;
-    top: 1.6vh
+    margin-left: 1.6vw;
+    margin-top: 1.6vh
 }
 
 .basicInfoList li:nth-child(6n) .colorBlock{

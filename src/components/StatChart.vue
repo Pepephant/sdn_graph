@@ -4,6 +4,7 @@
 
 <script>
 import { Chart } from '@antv/g2';
+import { toRaw } from 'vue';
 
 export default {
     name: 'StatisticsChart',
@@ -14,16 +15,69 @@ export default {
         }
     },
     methods: {
+        reRender(data) {
+            const chart = new Chart({
+                container: 'chart',
+                autoFit: true,
+            });
+
+            chart.data(data);
+
+            console.log(data);
+
+            chart
+                .interval()
+                .encode('x', 'time')
+                .encode('y', 'flow')
+                .axis('y', {
+                    position: 'left',
+                    title: 'Flow',
+                    titleFill: '#fdae6b',
+                    style: {
+                        fill: '#11e9fb'
+                    },
+                    label: {
+                        textStyle: {
+                            textAlign: 'center', // 文本对齐方向，可取值为： start middle end
+                            fill: 'red', // 文本的颜色
+                            fontSize: '40px', // 文本大小
+                            autoRotate: true // 是否需要自动旋转，默认为 true
+                        }
+                    },
+                    grid: {
+                        line: {
+                            style: {
+                                stroke: '#11e9fb',
+                            lineWidth: 1,
+                            lineDash: [ 2, 2 ]
+                            }
+                        }
+                    }
+                })
+                .tooltip(false);
+
+            chart
+                .line()
+                .encode('x', 'time')
+                .encode('y', 'flow')
+                .encode('shape', 'smooth')
+                .style('stroke', '#fdae6b')
+                .style('lineWidth', 2)
+                .scale('y', { independent: true })
+                .axis('y', {
+                    position: 'right',
+                })
+                .tooltip({
+                    field: 'flow'
+                });
+
+            chart.render();
+
+            this.chart = chart;
+            }
     },
     mounted(){
         const data = [
-            { time: 1, flow: 10},
-            { time: 2, flow: 12},
-            { time: 3, flow: 130},
-            { time: 4, flow: 98},
-            { time: 5, flow: 115},
-            { time: 6, flow: 48},
-            { time: 7, flow: 13},
         ];
 
         const chart = new Chart({

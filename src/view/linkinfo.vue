@@ -28,90 +28,184 @@ export default {
     },
     data(){
         return{
+            flowIndex: 0,
             selectedHost: {},
             nodeData: [
                 {
                     list: 1,
-                    id: '链路1',
+                    id: '链路1(leaf1-h1a)',
                     ip: '下降',
                 },
                 {
                     list: 2,
-                    id: '链路2',
+                    id: '链路2(leaf1-h1b)',
                     ip: '下降'
                 },
                 {
                     list: 3,
-                    id: '链路3',
+                    id: '链路3(leaf2-h2a)',
                     ip: '升高'
                 },
                 {
                     list: 4,
-                    id: '链路4',
+                    id: '链路4(leaf2-h2b)',
                     ip: '升高'
                 },
                 {
                     list: 5,
-                    id: '链路5',
+                    id: '链路5(leaf3-h3a)',
+                    ip: '下降'
+                },
+                {
+                    list: 6,
+                    id: '链路6(leaf3-h3b)',
+                    ip: '下降'
+                },
+                {
+                    list: 7,
+                    id: '链路7(leaf4-h4a)',
+                    ip: '下降'
+                },
+                {
+                    list: 8,
+                    id: '链路8(leaf4-h4b)',
+                    ip: '下降'
+                },
+                {
+                    list: 9,
+                    id: '链路9(leaf5-h5a)',
+                    ip: '下降'
+                },
+                {
+                    list: 10,
+                    id: '链路10(leaf5-h5b)',
+                    ip: '下降'
+                },
+                {
+                    list: 11,
+                    id: '链路11(leaf5-h5c)',
+                    ip: '下降'
+                },
+                {
+                    list: 12,
+                    id: '链路12(spine1-leaf1)',
+                    ip: '下降'
+                },
+                {
+                    list: 13,
+                    id: '链路13(spine1-leaf2)',
+                    ip: '下降'
+                },
+                {
+                    list: 14,
+                    id: '链路14(spine1-leaf3)',
+                    ip: '下降'
+                },
+                {
+                    list: 15,
+                    id: '链路15(spine1-leaf4)',
+                    ip: '下降'
+                },
+                {
+                    list: 16,
+                    id: '链路16(spine1-leaf5)',
+                    ip: '下降'
+                },
+                {
+                    list: 17,
+                    id: '链路17(spine2-leaf1)',
+                    ip: '下降'
+                },
+                {
+                    list: 18,
+                    id: '链路18(spine2-leaf2)',
+                    ip: '下降'
+                },
+                {
+                    list: 19,
+                    id: '链路19(spine2-leaf3)',
+                    ip: '下降'
+                },
+                {
+                    list: 20,
+                    id: '链路20(spine2-leaf4)',
+                    ip: '下降'
+                },
+                {
+                    list: 21,
+                    id: '链路21(spine2-leaf5)',
+                    ip: '下降'
+                },
+                {
+                    list: 22,
+                    id: '链路22(spine3-leaf1)',
+                    ip: '下降'
+                },
+                {
+                    list: 23,
+                    id: '链路23(spine3-leaf2)',
+                    ip: '下降'
+                },
+                {
+                    list: 24,
+                    id: '链路24(spine3-leaf3)',
+                    ip: '下降'
+                },
+                {
+                    list: 25,
+                    id: '链路25(spine3-leaf4)',
+                    ip: '下降'
+                },
+                {
+                    list: 26,
+                    id: '链路26(spine3-leaf5)',
                     ip: '下降'
                 },
             ],
-            allHosts: {
-                1: [
-                    { time: 1, flow: 10},
-                    { time: 2, flow: 12},
-                    { time: 3, flow: 130},
-                    { time: 4, flow: 98},
-                    { time: 5, flow: 115},
-                    { time: 6, flow: 48},
-                    { time: 7, flow: 13},
+            allHosts: [
+                [
+                    {'time': 0, 'flow': 1.02}, {'time': 1, 'flow': 1.0}, {'time': 2, 'flow': 1.05}, {'time': 3, 'flow': 1.0}, 
+                    {'time': 4, 'flow': 1.03}, {'time': 5, 'flow': 1.0}, {'time': 6, 'flow': 1.02}, {'time': 7, 'flow': 1.01}, 
+                    {'time': 8, 'flow': 1.04}, {'time': 9, 'flow': 1.0}, {'time': 10, 'flow': 1.02}, {'time': 11, 'flow': 1.01}, 
+                    {'time': 12, 'flow': 1.02}, {'time': 13, 'flow': 1.0}, {'time': 14, 'flow': 1.02}, {'time': 15, 'flow': 1.01}, 
+                    {'time': 16, 'flow': 1.03}, {'time': 17, 'flow': 1.0}, {'time': 18, 'flow': 1.02}, {'time': 19, 'flow': 1.01}, 
+                    {'time': 20, 'flow': 1.05}, {'time': 21, 'flow': 1.0}, {'time': 22, 'flow': 1.02}, {'time': 23, 'flow': 1.01}, 
+                    {'time': 24, 'flow': 1.03}, {'time': 25, 'flow': 1.0}, {'time': 26, 'flow': 1.02}, {'time': 27, 'flow': 1.01}, 
+                    {'time': 28, 'flow': 1.02}, {'time': 29, 'flow': 1.0}, {'time': 30, 'flow': 20.0}, {'time': 31, 'flow': 25.0}, 
+                    {'time': 32, 'flow': 30.0}, {'time': 33, 'flow': 35.0}, {'time': 34, 'flow': 40.0}, {'time': 35, 'flow': 45.0}, 
+                    {'time': 36, 'flow': 50.0}, {'time': 37, 'flow': 55.0}, {'time': 38, 'flow': 60.0}, {'time': 39, 'flow': 65.0}, 
+                    {'time': 40, 'flow': 70.0}, {'time': 41, 'flow': 75.0}, {'time': 42, 'flow': 80.0}, {'time': 43, 'flow': 85.0}, 
+                    {'time': 44, 'flow': 90.0}, {'time': 45, 'flow': 95.0}, {'time': 46, 'flow': 100.0}, {'time': 47, 'flow': 105.0}, 
+                    {'time': 48, 'flow': 110.0}, {'time': 49, 'flow': 115.0}, {'time': 50, 'flow': 120.0}, {'time': 51, 'flow': 125.0},
+                    {'time': 52, 'flow': 130.0}, {'time': 53, 'flow': 135.0}, {'time': 54, 'flow': 140.0}, {'time': 55, 'flow': 145.0}, 
+                    {'time': 56, 'flow': 150.0}, {'time': 57, 'flow': 155.0}, {'time': 58, 'flow': 160.0}, {'time': 59, 'flow': 165.0}, 
+                    {'time': 60, 'flow': 150.0}, {'time': 61, 'flow': 140.0}, {'time': 62, 'flow': 130.0}, {'time': 63, 'flow': 120.0}, 
+                    {'time': 64, 'flow': 110.0}, {'time': 65, 'flow': 100.0}, {'time': 66, 'flow': 90.0}, {'time': 67, 'flow': 80.0}, 
+                    {'time': 68, 'flow': 70.0}, {'time': 69, 'flow': 60.0}, {'time': 70, 'flow': 50.0}, {'time': 71, 'flow': 45.0}, 
+                    {'time': 72, 'flow': 40.0}, {'time': 73, 'flow': 35.0}, {'time': 74, 'flow': 30.0}, {'time': 75, 'flow': 25.0},
+                    {'time': 76, 'flow': 20.0}, {'time': 77, 'flow': 15.0}, {'time': 78, 'flow': 10.0}, {'time': 79, 'flow': 8.0}, 
+                    {'time': 80, 'flow': 6.0}, {'time': 81, 'flow': 5.0}, {'time': 82, 'flow': 4.5}, {'time': 83, 'flow': 4.0}, 
+                    {'time': 84, 'flow': 3.5}, {'time': 85, 'flow': 3.0}, {'time': 86, 'flow': 2.5}, {'time': 87, 'flow': 2.0}, 
+                    {'time': 88, 'flow': 1.8}, {'time': 89, 'flow': 1.6}, {'time': 90, 'flow': 1.4}, {'time': 91, 'flow': 1.2}, 
+                    {'time': 92, 'flow': 1.1}, {'time': 93, 'flow': 1.0}, {'time': 94, 'flow': 0.9}, {'time': 95, 'flow': 0.8}, 
+                    {'time': 96, 'flow': 0.7}, {'time': 97, 'flow': 0.6}, {'time': 98, 'flow': 0.5}, {'time': 99, 'flow': 0.4}, 
+                    {'time': 100, 'flow': 0.35}, {'time': 101, 'flow': 0.3}, {'time': 102, 'flow': 0.25}, {'time': 103, 'flow': 0.2}, 
+                    {'time': 104, 'flow': 0.15}, {'time': 105, 'flow': 0.1}, {'time': 106, 'flow': 0.08}, {'time': 107, 'flow': 0.06}, 
+                    {'time': 108, 'flow': 0.04}, {'time': 109, 'flow': 0.02}, {'time': 110, 'flow': 0.01}, {'time': 111, 'flow': 1.0}, 
+                    {'time': 112, 'flow': 1.0}, {'time': 113, 'flow': 1.01}, {'time': 114, 'flow': 1.0}, {'time': 115, 'flow': 1.02}, 
+                    {'time': 116, 'flow': 1.0}, {'time': 117, 'flow': 1.03}, {'time': 118, 'flow': 1.0}, {'time': 119, 'flow': 1.02}, 
+                    {'time': 120, 'flow': 1.0}
                 ],
-                2: [
-                    { time: 1, flow: 10},
-                    { time: 2, flow: 12},
-                    { time: 3, flow: 66},
-                    { time: 4, flow: 98},
-                    { time: 5, flow: 105},
-                    { time: 6, flow: 38},
-                    { time: 7, flow: 13},
-                ],
-                3: [
-                    { time: 1, flow: 10},
-                    { time: 2, flow: 12},
-                    { time: 3, flow: 66},
-                    { time: 4, flow: 13},
-                    { time: 5, flow: 25},
-                    { time: 6, flow: 48},
-                    { time: 7, flow: 113},
-                ],
-                4: [
-                    { time: 1, flow: 10},
-                    { time: 2, flow: 32},
-                    { time: 3, flow: 26},
-                    { time: 4, flow: 13},
-                    { time: 5, flow: 75},
-                    { time: 6, flow: 48},
-                    { time: 7, flow: 113},
-                ],
-                5: [
-                    { time: 1, flow: 10},
-                    { time: 2, flow: 12},
-                    { time: 3, flow: 66},
-                    { time: 4, flow: 98},
-                    { time: 5, flow: 95},
-                    { time: 6, flow: 118},
-                    { time: 7, flow: 13},
-                ],
-            }
+            ]
         }
     },
     methods:{
         updatehost(e){
-            this.selectedHost = this.allLInks['Link:'+e].basic;
-            this.selectedHost.name = e;
-            this.selectedHost.flow = this.timeFlow['r'+e];
-            this.selectedHost.flowIndex = this.timeFlow.curIndex;
-            this.$refs.statistics.reRender();
+            this.flowIndex = 0;
+            this.selectedHost = this.allHosts[e - 1];
+            console.log(e - 1);
+            console.log(this.allHosts[e - 1]);
+            this.$refs.statistics.reRender(this.allHosts[e-1], this.flowIndex);
         },
     },
 }
@@ -140,6 +234,10 @@ export default {
     border: 2px dashed rgb(9, 85, 133);
     width: 75%;
     height: 60vh;
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none;
 }
 
 .titleback{

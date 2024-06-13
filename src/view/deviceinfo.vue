@@ -9,7 +9,7 @@
             <h2 class="h2title">攻 击 监 控</h2>
             <div class="statistics">
                 <div class="flow">
-                    <stat-chart :flow="this.selectedHost.flow" :flowIndex="this.selectedHost.flowIndex" ref="statistics"></stat-chart>
+                    <stat-chart :flow="this.selectedHost" :flowIndex="this.flowIndex" ref="statistics"></stat-chart>
                 </div>
             </div>
         </div>
@@ -29,103 +29,145 @@ export default {
     data(){
         return{
             selectedHost: {},
+            flowIndex: 0,
             nodeData: [
                 {
                     list: 1,
-                    id: 'server1',
-                    ip: 'DrDoS_DNS',
+                    id: 'h1a',
+                    ip: 'SYN Flood',
                 },
                 {
                     list: 2,
-                    id: 'server2',
-                    ip: 'DrDoS_NTP'
+                    id: 'h1a',
+                    ip: 'Bandwidth Exhaustion attack'
                 },
                 {
                     list: 3,
-                    id: 'server3',
-                    ip: 'DrDoS_NTP'
+                    id: 'h1a',
+                    ip: 'CPU and Memory Exhaustion'
                 },
                 {
                     list: 4,
-                    id: 'client1',
-                    ip: 'DrDoS_DNS'
+                    id: 'h1a',
+                    ip: 'Slowloris'
                 },
                 {
                     list: 5,
-                    id: 'client2',
-                    ip: 'DrDoS_NTP'
-                },
-                {
-                    list: 6,
-                    id: 'client3',
-                    ip: 'DrDoS_DNS'
+                    id: 'h1b',
+                    ip: '未受攻击'
                 },
             ],
-            allHosts: {
-                1: [
-                    { time: 1, flow: 10},
-                    { time: 2, flow: 12},
-                    { time: 3, flow: 130},
-                    { time: 4, flow: 98},
-                    { time: 5, flow: 115},
-                    { time: 6, flow: 48},
-                    { time: 7, flow: 13},
+            allHosts: [
+                [
+                    {'time': 30, 'flow': 2.0}, {'time': 31, 'flow': 2.5}, {'time': 32, 'flow': 3.0}, {'time': 33, 'flow': 3.5}, 
+                    {'time': 34, 'flow': 4.0}, {'time': 35, 'flow': 4.5}, {'time': 36, 'flow': 5.0}, {'time': 37, 'flow': 5.5}, 
+                    {'time': 38, 'flow': 6.0}, {'time': 39, 'flow': 6.5}, {'time': 40, 'flow': 7.0}, {'time': 41, 'flow': 7.5}, 
+                    {'time': 42, 'flow': 8.0}, {'time': 43, 'flow': 8.5}, {'time': 44, 'flow': 9.0}, {'time': 45, 'flow': 9.5}, 
+                    {'time': 46, 'flow': 10.0}, {'time': 47, 'flow': 10.5}, {'time': 48, 'flow': 11.0}, {'time': 49, 'flow': 11.5}, 
+                    {'time': 50, 'flow': 12.0}, {'time': 51, 'flow': 12.5}, {'time': 52, 'flow': 13.0}, {'time': 53, 'flow': 13.5}, 
+                    {'time': 54, 'flow': 14.0}, {'time': 55, 'flow': 14.5}, {'time': 56, 'flow': 15.0}, {'time': 57, 'flow': 15.5}, 
+                    {'time': 58, 'flow': 16.0}, {'time': 59, 'flow': 16.5}, {'time': 60, 'flow': 15.0}, {'time': 61, 'flow': 15.1}, 
+                    {'time': 62, 'flow': 14.9}, {'time': 63, 'flow': 15.2}, {'time': 64, 'flow': 14.8}, {'time': 65, 'flow': 15.05}, 
+                    {'time': 66, 'flow': 14.95}, {'time': 67, 'flow': 15.15}, {'time': 68, 'flow': 14.85}, {'time': 69, 'flow': 15.0}, 
+                    {'time': 70, 'flow': 15.1}, {'time': 71, 'flow': 14.9}, {'time': 72, 'flow': 15.2}, {'time': 73, 'flow': 14.8}, 
+                    {'time': 74, 'flow': 15.05}, {'time': 75, 'flow': 14.95}, {'time': 76, 'flow': 15.15}, {'time': 77, 'flow': 14.85}, 
+                    {'time': 78, 'flow': 15.0}, {'time': 79, 'flow': 15.1}, {'time': 80, 'flow': 14.9}, {'time': 81, 'flow': 15.2}, 
+                    {'time': 82, 'flow': 14.8}, {'time': 83, 'flow': 15.05}, {'time': 84, 'flow': 14.95}, {'time': 85, 'flow': 15.15}, 
+                    {'time': 86, 'flow': 14.85}, {'time': 87, 'flow': 15.0}, {'time': 88, 'flow': 15.1}, {'time': 89, 'flow': 14.9}, 
+                    {'time': 90, 'flow': 15.2}, {'time': 91, 'flow': 14.8}, {'time': 92, 'flow': 15.05}, {'time': 93, 'flow': 14.95}, 
+                    {'time': 94, 'flow': 15.15}, {'time': 95, 'flow': 14.85}, {'time': 96, 'flow': 15.0}, {'time': 97, 'flow': 15.1}, 
+                    {'time': 98, 'flow': 14.9}, {'time': 99, 'flow': 15.2}, {'time': 100, 'flow': 14.8}, {'time': 101, 'flow': 15.05}, 
+                    {'time': 102, 'flow': 14.95}, {'time': 103, 'flow': 15.15}, {'time': 104, 'flow': 14.85}, {'time': 105, 'flow': 15.0}, 
+                    {'time': 106, 'flow': 15.1}, {'time': 107, 'flow': 14.9}, {'time': 108, 'flow': 15.2}, {'time': 109, 'flow': 14.8}, 
+                    {'time': 110, 'flow': 15.05}, {'time': 111, 'flow': 14.95}, {'time': 112, 'flow': 15.15}, {'time': 113, 'flow': 14.85}, 
+                    {'time': 114, 'flow': 15.0}, {'time': 115, 'flow': 15.1}, {'time': 116, 'flow': 14.9}, {'time': 117, 'flow': 15.2}, 
+                    {'time': 118, 'flow': 14.8}, {'time': 119, 'flow': 15.05}, {'time': 120, 'flow': 14.95}
                 ],
-                2: [
-                    { time: 1, flow: 10},
-                    { time: 2, flow: 12},
-                    { time: 3, flow: 66},
-                    { time: 4, flow: 98},
-                    { time: 5, flow: 105},
-                    { time: 6, flow: 38},
-                    { time: 7, flow: 13},
+                [
+                    {'time': 30, 'flow': 4.0}, {'time': 31, 'flow': 5.0}, {'time': 32, 'flow': 6.0}, {'time': 33, 'flow': 7.0}, 
+                    {'time': 34, 'flow': 8.0}, {'time': 35, 'flow': 9.0}, {'time': 36, 'flow': 10.0}, {'time': 37, 'flow': 11.0}, 
+                    {'time': 38, 'flow': 12.0}, {'time': 39, 'flow': 13.0}, {'time': 40, 'flow': 14.0}, {'time': 41, 'flow': 15.0}, 
+                    {'time': 42, 'flow': 16.0}, {'time': 43, 'flow': 17.0}, {'time': 44, 'flow': 18.0}, {'time': 45, 'flow': 19.0}, 
+                    {'time': 46, 'flow': 20.0}, {'time': 47, 'flow': 21.0}, {'time': 48, 'flow': 22.0}, {'time': 49, 'flow': 23.0}, 
+                    {'time': 50, 'flow': 24.0}, {'time': 51, 'flow': 25.0}, {'time': 52, 'flow': 26.0}, {'time': 53, 'flow': 27.0}, 
+                    {'time': 54, 'flow': 28.0}, {'time': 55, 'flow': 29.0}, {'time': 56, 'flow': 30.0}, {'time': 57, 'flow': 31.0}, 
+                    {'time': 58, 'flow': 32.0}, {'time': 59, 'flow': 33.0}, {'time': 60, 'flow': 30.0}, {'time': 61, 'flow': 30.2}, 
+                    {'time': 62, 'flow': 29.8}, {'time': 63, 'flow': 30.4}, {'time': 64, 'flow': 29.6}, {'time': 65, 'flow': 30.1}, 
+                    {'time': 66, 'flow': 29.9}, {'time': 67, 'flow': 30.3}, {'time': 68, 'flow': 29.7}, {'time': 69, 'flow': 30.0}, 
+                    {'time': 70, 'flow': 30.2}, {'time': 71, 'flow': 29.8}, {'time': 72, 'flow': 30.4}, {'time': 73, 'flow': 29.6}, 
+                    {'time': 74, 'flow': 30.1}, {'time': 75, 'flow': 29.9}, {'time': 76, 'flow': 30.3}, {'time': 77, 'flow': 29.7},
+                    {'time': 78, 'flow': 30.0}, {'time': 79, 'flow': 30.2}, {'time': 80, 'flow': 29.8}, {'time': 81, 'flow': 30.4}, 
+                    {'time': 82, 'flow': 29.6}, {'time': 83, 'flow': 30.1}, {'time': 84, 'flow': 29.9}, {'time': 85, 'flow': 30.3}, 
+                    {'time': 86, 'flow': 29.7}, {'time': 87, 'flow': 30.0}, {'time': 88, 'flow': 30.2}, {'time': 89, 'flow': 29.8}, 
+                    {'time': 90, 'flow': 30.4}, {'time': 91, 'flow': 29.6}, {'time': 92, 'flow': 30.1}, {'time': 93, 'flow': 29.9}, 
+                    {'time': 94, 'flow': 30.3}, {'time': 95, 'flow': 29.7}, {'time': 96, 'flow': 30.0}, {'time': 97, 'flow': 30.2}, 
+                    {'time': 98, 'flow': 29.8}, {'time': 99, 'flow': 30.4}, {'time': 100, 'flow': 29.6}, {'time': 101, 'flow': 30.1}, 
+                    {'time': 102, 'flow': 29.9}, {'time': 103, 'flow': 30.3}, {'time': 104, 'flow': 29.7}, {'time': 105, 'flow': 30.0}, 
+                    {'time': 106, 'flow': 30.2}, {'time': 107, 'flow': 29.8}, {'time': 108, 'flow': 30.4}, {'time': 109, 'flow': 29.6}, 
+                    {'time': 110, 'flow': 30.1}, {'time': 111, 'flow': 29.9}, {'time': 112, 'flow': 30.3}, {'time': 113, 'flow': 29.7}, 
+                    {'time': 114, 'flow': 30.0}, {'time': 115, 'flow': 30.2}, {'time': 116, 'flow': 29.8}, {'time': 117, 'flow': 30.4}, 
+                    {'time': 118, 'flow': 29.6}, {'time': 119, 'flow': 30.1}, {'time': 120, 'flow': 29.9}
                 ],
-                3: [
-                    { time: 1, flow: 10},
-                    { time: 2, flow: 12},
-                    { time: 3, flow: 66},
-                    { time: 4, flow: 13},
-                    { time: 5, flow: 25},
-                    { time: 6, flow: 48},
-                    { time: 7, flow: 113},
+                [
+                    {'time': 30, 'flow': 10.0}, {'time': 31, 'flow': 12.5}, {'time': 32, 'flow': 15.0}, {'time': 33, 'flow': 17.5}, 
+                    {'time': 34, 'flow': 20.0}, {'time': 35, 'flow': 22.5}, {'time': 36, 'flow': 25.0}, {'time': 37, 'flow': 27.5}, 
+                    {'time': 38, 'flow': 30.0}, {'time': 39, 'flow': 32.5}, {'time': 40, 'flow': 35.0}, {'time': 41, 'flow': 37.5}, 
+                    {'time': 42, 'flow': 40.0}, {'time': 43, 'flow': 42.5}, {'time': 44, 'flow': 45.0}, {'time': 45, 'flow': 47.5}, 
+                    {'time': 46, 'flow': 50.0}, {'time': 47, 'flow': 52.5}, {'time': 48, 'flow': 55.0}, {'time': 49, 'flow': 57.5}, 
+                    {'time': 50, 'flow': 60.0}, {'time': 51, 'flow': 62.5}, {'time': 52, 'flow': 65.0}, {'time': 53, 'flow': 67.5}, 
+                    {'time': 54, 'flow': 70.0}, {'time': 55, 'flow': 72.5}, {'time': 56, 'flow': 75.0}, {'time': 57, 'flow': 77.5}, 
+                    {'time': 58, 'flow': 80.0}, {'time': 59, 'flow': 82.5}, {'time': 60, 'flow': 75.0}, {'time': 61, 'flow': 75.5}, 
+                    {'time': 62, 'flow': 74.5}, {'time': 63, 'flow': 76.0}, {'time': 64, 'flow': 74.0}, {'time': 65, 'flow': 75.25}, 
+                    {'time': 66, 'flow': 74.75}, {'time': 67, 'flow': 76.25}, {'time': 68, 'flow': 73.75}, {'time': 69, 'flow': 75.0}, 
+                    {'time': 70, 'flow': 75.5}, {'time': 71, 'flow': 74.5}, {'time': 72, 'flow': 76.0}, {'time': 73, 'flow': 74.0}, 
+                    {'time': 74, 'flow': 75.25}, {'time': 75, 'flow': 74.75}, {'time': 76, 'flow': 76.25}, {'time': 77, 'flow': 73.75}, 
+                    {'time': 78, 'flow': 75.0}, {'time': 79, 'flow': 75.5}, {'time': 80, 'flow': 74.5}, {'time': 81, 'flow': 76.0}, 
+                    {'time': 82, 'flow': 74.0}, {'time': 83, 'flow': 75.25}, {'time': 84, 'flow': 74.75}, {'time': 85, 'flow': 76.25}, 
+                    {'time': 86, 'flow': 73.75}, {'time': 87, 'flow': 75.0}, {'time': 88, 'flow': 75.5}, {'time': 89, 'flow': 74.5}, 
+                    {'time': 90, 'flow': 76.0}, {'time': 91, 'flow': 74.0}, {'time': 92, 'flow': 75.25}, {'time': 93, 'flow': 74.75}, 
+                    {'time': 94, 'flow': 76.25}, {'time': 95, 'flow': 73.75}, {'time': 96, 'flow': 75.0}, {'time': 97, 'flow': 75.5}, 
+                    {'time': 98, 'flow': 74.5}, {'time': 99, 'flow': 76.0}, {'time': 100, 'flow': 74.0}, {'time': 101, 'flow': 75.25}, 
+                    {'time': 102, 'flow': 74.75}, {'time': 103, 'flow': 76.25}, {'time': 104, 'flow': 73.75}, {'time': 105, 'flow': 75.0}, 
+                    {'time': 106, 'flow': 75.5}, {'time': 107, 'flow': 74.5}, {'time': 108, 'flow': 76.0}, {'time': 109, 'flow': 74.0}, 
+                    {'time': 110, 'flow': 75.25}, {'time': 111, 'flow': 74.75}, {'time': 112, 'flow': 76.25}, {'time': 113, 'flow': 73.75}, 
+                    {'time': 114, 'flow': 75.0}, {'time': 115, 'flow': 75.5}, {'time': 116, 'flow': 74.5}, {'time': 117, 'flow': 76.0}, 
+                    {'time': 118, 'flow': 74.0}, {'time': 119, 'flow': 75.25}, {'time': 120, 'flow': 74.75}
                 ],
-                4: [
-                    { time: 1, flow: 10},
-                    { time: 2, flow: 32},
-                    { time: 3, flow: 26},
-                    { time: 4, flow: 13},
-                    { time: 5, flow: 75},
-                    { time: 6, flow: 48},
-                    { time: 7, flow: 113},
+                [
+                    {'time': 30, 'flow': 4.0}, {'time': 31, 'flow': 5.0}, {'time': 32, 'flow': 6.0}, {'time': 33, 'flow': 7.0}, 
+                    {'time': 34, 'flow': 8.0}, {'time': 35, 'flow': 9.0}, {'time': 36, 'flow': 10.0}, {'time': 37, 'flow': 11.0}, 
+                    {'time': 38, 'flow': 12.0}, {'time': 39, 'flow': 13.0}, {'time': 40, 'flow': 14.0}, {'time': 41, 'flow': 15.0}, 
+                    {'time': 42, 'flow': 16.0}, {'time': 43, 'flow': 17.0}, {'time': 44, 'flow': 18.0}, {'time': 45, 'flow': 19.0}, 
+                    {'time': 46, 'flow': 20.0}, {'time': 47, 'flow': 21.0}, {'time': 48, 'flow': 22.0}, {'time': 49, 'flow': 23.0}, 
+                    {'time': 50, 'flow': 24.0}, {'time': 51, 'flow': 25.0}, {'time': 52, 'flow': 26.0}, {'time': 53, 'flow': 27.0}, 
+                    {'time': 54, 'flow': 28.0}, {'time': 55, 'flow': 29.0}, {'time': 56, 'flow': 30.0}, {'time': 57, 'flow': 31.0}, 
+                    {'time': 58, 'flow': 32.0}, {'time': 59, 'flow': 33.0}, {'time': 60, 'flow': 30.0}, {'time': 61, 'flow': 30.1}, 
+                    {'time': 62, 'flow': 29.9}, {'time': 63, 'flow': 30.2}, {'time': 64, 'flow': 29.8}, {'time': 65, 'flow': 30.05}, 
+                    {'time': 66, 'flow': 29.95}, {'time': 67, 'flow': 30.15}, {'time': 68, 'flow': 29.85}, {'time': 69, 'flow': 30.0}, 
+                    {'time': 70, 'flow': 30.1}, {'time': 71, 'flow': 29.9}, {'time': 72, 'flow': 30.2}, {'time': 73, 'flow': 29.8}, 
+                    {'time': 74, 'flow': 30.05}, {'time': 75, 'flow': 29.95}, {'time': 76, 'flow': 30.15}, {'time': 77, 'flow': 29.85}, 
+                    {'time': 78, 'flow': 30.0}, {'time': 79, 'flow': 30.1}, {'time': 80, 'flow': 29.9}, {'time': 81, 'flow': 30.2}, 
+                    {'time': 82, 'flow': 29.8}, {'time': 83, 'flow': 30.05}, {'time': 84, 'flow': 29.95}, {'time': 85, 'flow': 30.15}, 
+                    {'time': 86, 'flow': 29.85}, {'time': 87, 'flow': 30.0}, {'time': 88, 'flow': 30.1}, {'time': 89, 'flow': 29.9}, 
+                    {'time': 90, 'flow': 30.2}, {'time': 91, 'flow': 29.8}, {'time': 92, 'flow': 30.05}, {'time': 93, 'flow': 29.95}, 
+                    {'time': 94, 'flow': 30.15}, {'time': 95, 'flow': 29.85}, {'time': 96, 'flow': 30.0}, {'time': 97, 'flow': 30.1}, 
+                    {'time': 98, 'flow': 29.9}, {'time': 99, 'flow': 30.2}, {'time': 100, 'flow': 29.8}, {'time': 101, 'flow': 30.05}, 
+                    {'time': 102, 'flow': 29.95}, {'time': 103, 'flow': 30.15}, {'time': 104, 'flow': 29.85}, {'time': 105, 'flow': 30.0}, 
+                    {'time': 106, 'flow': 30.1}, {'time': 107, 'flow': 29.9}, {'time': 108, 'flow': 30.2}, {'time': 109, 'flow': 29.8}, 
+                    {'time': 110, 'flow': 30.05}, {'time': 111, 'flow': 29.95}, {'time': 112, 'flow': 30.15}, {'time': 113, 'flow': 29.85}, 
+                    {'time': 114, 'flow': 30.0}, {'time': 115, 'flow': 30.1}, {'time': 116, 'flow': 29.9}, {'time': 117, 'flow': 30.2}, 
+                    {'time': 118, 'flow': 29.8}, {'time': 119, 'flow': 30.05}, {'time': 120, 'flow': 29.95}
                 ],
-                5: [
-                    { time: 1, flow: 10},
-                    { time: 2, flow: 12},
-                    { time: 3, flow: 66},
-                    { time: 4, flow: 98},
-                    { time: 5, flow: 95},
-                    { time: 6, flow: 118},
-                    { time: 7, flow: 13},
-                ],
-                6: [
-                    { time: 1, flow: 10},
-                    { time: 2, flow: 12},
-                    { time: 3, flow: 76},
-                    { time: 4, flow: 98},
-                    { time: 5, flow: 95},
-                    { time: 6, flow: 108},
-                    { time: 7, flow: 23},
-                ],
-            }
+                []
+            ]
         }
     },
     methods:{
         updatehost(e){
-            this.selectedHost = this.allLInks['Link:'+e].basic;
-            this.selectedHost.name = e;
-            this.selectedHost.flow = this.timeFlow['r'+e];
-            this.selectedHost.flowIndex = this.timeFlow.curIndex;
-            this.$refs.statistics.reRender();
+            this.flowIndex = 0;
+            this.selectedHost = this.allHosts[e - 1];
+            console.log(this.selectedHost);
+            this.$refs.statistics.reRender(this.allHosts[e-1], this.flowIndex);
         },
     },
 }

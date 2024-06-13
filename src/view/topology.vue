@@ -22,47 +22,74 @@ export default {
     data(){
         return{
             nodeData: [
-                {
-                    list: 1,
-                    id: 'client1',
-                    ip: '2001:1:1::1/64'
+                { 
+                    list: 1, id: "h1a", ip:'2001:1:1::1/64'
                 },
-                {
-                    list: 2,
-                    id: 'client2',
-                    ip: '2001:1:2::1/64'
+                { 
+                    list: 2, id: "h1b", ip:'2001:1:1::2/64'
                 },
-                {
-                    list: 3,
-                    id: 'client3',
-                    ip: '2001:1:3::1/64'
+                { 
+                    list: 3, id: "h2a", ip:'2001:1:1::3/64'
                 },
-                {
-                    list: 4,
-                    id: 'server1',
-                    ip: '2001:1:4::1/64'
+                { 
+                    list: 4, id: "h2b", ip:'2001:1:1::4/64'
                 },
-                {
-                    list: 5,
-                    id: 'server2',
-                    ip: '2001:1:5::1/64'
+                { 
+                    list: 5, id: "h3a", ip:'2001:1:1::5/64'
                 },
-                {
-                    list: 6,
-                    id: 'server3',
-                    ip: '2001:1:6::1/64'
+                { 
+                    list: 6, id: "h3b", ip:'2001:1:1::6/64'
                 },
-                {
-                    list: 7,
-                    id: 'SwitchBoard1',
+                { 
+                    list: 7, id: "h4a", ip:'2001:1:1::7/64'
                 },
-                {
-                    list: 8,
-                    id: 'SwitchBoard2',
+                { 
+                    list: 8, id: "h4b", ip:'2001:1:1::8/64'
                 },
-                {
-                    list: 9,
-                    id: 'SwitchBoard3',
+                { 
+                    list: 9, id: "h5a", ip:'2001:1:1::9/64'
+                },
+                { 
+                    list: 10, id: "h5b", ip:'2001:1:1::10/64'
+                },
+                { 
+                    list: 11, id: "h5c", ip:'2001:1:1::11/64'
+                },
+                { 
+                    list: 12, id: "leaf1", ip:''
+                },
+                { 
+                    list: 13, id: "leaf2", ip:''
+                },
+                { 
+                    list: 14, id: "leaf3", ip:''
+                },
+                { 
+                    list: 15, id: "leaf4", ip:''
+                },
+                { 
+                    list: 16, id: "leaf5", ip:''
+                },
+                { 
+                    list: 17, id: "spine1", ip:''
+                },
+                { 
+                    list: 18, id: "spine2", ip:''
+                },
+                { 
+                    list: 19, id: "spine3", ip:''
+                },
+                { 
+                    list: 20, id: "edge", ip:''
+                },
+                { 
+                    list: 21, id: "h6", ip:''
+                },
+                { 
+                    list: 22, id: "h7", ip:''
+                },
+                { 
+                    list: 23, id: "h8", ip:''
                 },
             ]
         }
