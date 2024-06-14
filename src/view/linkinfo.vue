@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import { toRaw } from 'vue';
-import store from '@/store/store'
 import TopoList from '@/components/TopoList.vue'
 import StatChart from '@/components/StatChart.vue'
 
@@ -36,132 +34,132 @@ export default {
                 {
                     list: 1,
                     id: '链路1(leaf1-h1a)',
-                    ip: '下降',
+                    ip: '正常',
                 },
                 {
                     list: 2,
                     id: '链路2(leaf1-h1b)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 3,
                     id: '链路3(leaf2-h2a)',
-                    ip: '升高'
+                    ip: '正常'
                 },
                 {
                     list: 4,
                     id: '链路4(leaf2-h2b)',
-                    ip: '升高'
+                    ip: '正常'
                 },
                 {
                     list: 5,
                     id: '链路5(leaf3-h3a)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 6,
                     id: '链路6(leaf3-h3b)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 7,
                     id: '链路7(leaf4-h4a)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 8,
                     id: '链路8(leaf4-h4b)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 9,
                     id: '链路9(leaf5-h5a)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 10,
                     id: '链路10(leaf5-h5b)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 11,
                     id: '链路11(leaf5-h5c)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 12,
                     id: '链路12(spine1-leaf1)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 13,
                     id: '链路13(spine1-leaf2)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 14,
                     id: '链路14(spine1-leaf3)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 15,
                     id: '链路15(spine1-leaf4)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 16,
                     id: '链路16(spine1-leaf5)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 17,
                     id: '链路17(spine2-leaf1)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 18,
                     id: '链路18(spine2-leaf2)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 19,
                     id: '链路19(spine2-leaf3)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 20,
                     id: '链路20(spine2-leaf4)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 21,
                     id: '链路21(spine2-leaf5)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 22,
                     id: '链路22(spine3-leaf1)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 23,
                     id: '链路23(spine3-leaf2)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 24,
                     id: '链路24(spine3-leaf3)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 25,
                     id: '链路25(spine3-leaf4)',
-                    ip: '下降'
+                    ip: '正常'
                 },
                 {
                     list: 26,
                     id: '链路26(spine3-leaf5)',
-                    ip: '下降'
+                    ip: '正常'
                 },
             ],
             allHosts: [
@@ -196,7 +194,12 @@ export default {
                     {'time': 108, 'flow': 0.04}, {'time': 109, 'flow': 0.02}, {'time': 110, 'flow': 0.01}, {'time': 111, 'flow': 1.0}, 
                     {'time': 112, 'flow': 1.0}, {'time': 113, 'flow': 1.01}, {'time': 114, 'flow': 1.0}, {'time': 115, 'flow': 1.02}, 
                     {'time': 116, 'flow': 1.0}, {'time': 117, 'flow': 1.03}, {'time': 118, 'flow': 1.0}, {'time': 119, 'flow': 1.02}, 
-                    {'time': 120, 'flow': 1.0}
+                    {'time': 120, 'flow': 1.0}, {'time': 121, 'flow': 1.2}, {'time': 122, 'flow': 1.1}, {'time': 123, 'flow': 1.3},
+                    {'time': 124, 'flow': 1.0}, {'time': 125, 'flow': 1.1}, {'time': 126, 'flow': 1.2}, {'time': 127, 'flow': 0.7},
+                    {'time': 128, 'flow': 0.9}, {'time': 129, 'flow': 1.1}, {'time': 130, 'flow': 1.0}, {'time': 131, 'flow': 1.2},
+                    {'time': 132, 'flow': 1.0}, {'time': 133, 'flow': 1.1}, {'time': 134, 'flow': 1.2}, {'time': 135, 'flow': 0.7},
+                    {'time': 136, 'flow': 0.9}, {'time': 137, 'flow': 1.1}, {'time': 138, 'flow': 1.0}, {'time': 139, 'flow': 1.2},
+                    {'time': 140, 'flow': 0.9}, {'time': 141, 'flow': 1.3}, {'time': 143, 'flow': 1.3}, {'time': 144, 'flow': 1.2},
                 ],
             ]
         }

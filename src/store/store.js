@@ -6,7 +6,7 @@ export default new Vuex.Store({
     mutations: {
       INCREMENT_TIME(state) {
         state.time++;
-        console.log(state.time);
+        // console.log(state.time);
       }
     },
     actions: {

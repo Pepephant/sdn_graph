@@ -15,8 +15,10 @@
 </template>
 
 <script>
+import store from '@/store/store'
 import NetVisual from '@/components/NetVisual.vue'
 import TopoList from '@/components/TopoList.vue'
+import { ElMessageBox } from 'element-plus'
 
 export default {
     data(){
@@ -95,9 +97,42 @@ export default {
         }
     },
     components: { TopoList, NetVisual },
+    methods: {
+        changeState() {
+            const now = store.state.time;
+            if (now < 30) {
+                return ;
+            } else if (now === 30){
+                ElMessageBox.alert(
+                    'h1a、h1b受到攻击',
+                    '攻击提示',
+                    {
+                        type: 'error',
+                        confirmButtonText: '确定',
+                        callback: action => {
+                            console.log(action)
+                        }
+                    }
+                )
+            } else if (now === 120) {
+                ElMessageBox.alert(
+                    'h1a、h1b攻击解除',
+                    '攻击解除提示',
+                    {
+                        type: 'success',
+                        confirmButtonText: '确定',
+                        callback: action => {
+                            console.log(action)
+                        }
+                    }
+                )
+            }
+        }
+    },
     mounted() {
         this.$refs.device_chart.scrollTop = 0;
-    }
+        setInterval(this.changeState, 1000);
+    },
 }
 </script>
 

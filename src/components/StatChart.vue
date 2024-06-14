@@ -25,12 +25,23 @@ export default {
             const lower = store.state.time;
             console.log('lower: ', lower);
 
-            let new_data = [];
-            for (let i = lower; i < lower + 10 && i < 120; i++) {
-                new_data.push(data[i]);
+            let new_datas = [];
+            const now = new Date();
+
+            for (let i = lower, j = 10; i < lower + 10 && i < 144; i++, j--) {
+                const new_flow = data[i].flow;
+                const time = new Date(now.getTime() - j * 1000);
+                const hours = String(time.getHours()).padStart(2, '0');
+                const minutes = String(time.getMinutes()).padStart(2, '0');
+                const seconds = String(time.getSeconds()).padStart(2, '0');
+                const new_time = `${hours}:${minutes}:${seconds}`;
+                let new_data = { 'time': new_time, 'flow': new_flow};
+                new_datas.push(new_data);
             }
 
-            chart.data(new_data);
+            chart.data(new_datas);
+
+            console.log('new_datas', new_datas);
 
             chart
                 .area()
@@ -54,7 +65,8 @@ export default {
                 .axis('x', {
                     title: 'Time',
                     titleFill: 'white',
-                    labelFill: 'white'
+                    labelFill: 'white',
+                    labelTransform: 'rotate(30deg)'
                 });
 
             chart.render();

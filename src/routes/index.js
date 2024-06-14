@@ -6,6 +6,11 @@ const Linkinfo = () => import('@/view/linkinfo')
  
 const routes = [
     {
+        path: '/',
+        name: 'index',
+        component: Topology
+    },
+    {
         path: '/topology',
         name: 'topology',
         component: Topology

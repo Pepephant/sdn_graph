@@ -3,16 +3,19 @@
 </template>
 
 <script>
-
+import store from '@/store/store'
 import { DataSet } from "vis-data/peer/esm/vis-data"
 import { Network } from "vis-network/peer/esm/vis-network";
 
 export default {
     data() {
-        return {};
+        return {
+            network: {}
+        };
     },
     mounted() {
         this.init();
+        setInterval(this.changeState, 1000);
     },
     methods: {
         init() {
@@ -245,10 +248,21 @@ export default {
             };
 
             const network = new Network(container, data, options);
+            this.network = network;
             network.on("click", function(e) {
                 console.log(e);
             });
         },
+        changeState() {
+            const now = store.state.time;
+            if (now < 30) {
+                return ;
+            } else if (now === 30) {
+                this.network.updateEdge(1, { id: 1, from: 12, to: 1, width: 2, color: 'red' })
+            } else if (now === 120) {
+                
+            }
+        }
     },
 };
 </script>

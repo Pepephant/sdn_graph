@@ -19,6 +19,7 @@
 <script>
 import TopoList from '@/components/TopoList.vue'
 import StatChart from '@/components/StatChart.vue'
+import store from '@/store/store'
 
 export default {
     name: 'HostMessage',
@@ -31,31 +32,29 @@ export default {
             selectedHost: {},
             flowIndex: 0,
             nodeData: [
-                {
-                    list: 1,
-                    id: 'h1a',
-                    ip: 'SYN Flood',
-                },
-                {
-                    list: 2,
-                    id: 'h1a',
-                    ip: 'Bandwidth Exhaustion attack'
-                },
-                {
-                    list: 3,
-                    id: 'h1a',
-                    ip: 'CPU and Memory Exhaustion'
-                },
-                {
-                    list: 4,
-                    id: 'h1a',
-                    ip: 'Slowloris'
-                },
-                {
-                    list: 5,
-                    id: 'h1b',
-                    ip: '未受攻击'
-                },
+                { list: 1, id: 'h1a', ip: '未受攻击' },
+                { list: 2, id: 'h1b', ip: '未受攻击' },
+                { list: 3, id: "h2a", ip: '未受攻击' },
+                { list: 4, id: "h2b", ip: '未受攻击' },
+                { list: 5, id: "h3a", ip: '未受攻击' },
+                { list: 6, id: "h3b", ip: '未受攻击' },
+                { list: 7, id: "h4a", ip: '未受攻击' },
+                { list: 8, id: "h4b", ip: '未受攻击' },
+                { list: 9, id: "h5a", ip: '未受攻击' },
+                { list: 10, id: "h5b", ip: '未受攻击' },
+                { list: 11, id: "h5c", ip: '未受攻击' },
+                { list: 12, id: "leaf1", ip: '未受攻击' },
+                { list: 13, id: "leaf2", ip: '未受攻击' },
+                { list: 14, id: "leaf3", ip: '未受攻击' },
+                { list: 15, id: "leaf4", ip: '未受攻击' },
+                { list: 16, id: "leaf5", ip: '未受攻击' },
+                { list: 17, id: "spine1", ip: '未受攻击' },
+                { list: 18, id: "spine2", ip: '未受攻击' },
+                { list: 19, id: "spine3", ip: '未受攻击' },
+                { list: 20, id: "edge", ip: '未受攻击' },
+                { list: 21, id: "h6", ip: '未受攻击' },
+                { list: 22, id: "h7", ip: '未受攻击' },
+                { list: 23, id: "h8", ip: '未受攻击' },
             ],
             allHosts: [
                 [
@@ -159,17 +158,59 @@ export default {
                     {'time': 118, 'flow': 29.8}, {'time': 119, 'flow': 30.05}, {'time': 120, 'flow': 29.95}
                 ],
                 []
-            ]
+            ],
+            state: 0,
         }
     },
     methods:{
         updatehost(e){
-            this.flowIndex = 0;
-            this.selectedHost = this.allHosts[e - 1];
-            console.log(this.selectedHost);
-            this.$refs.statistics.reRender(this.allHosts[e-1], this.flowIndex);
+            const now = store.state.time;
+            if (now > 30 && now < 110) {
+                this.flowIndex = 0;
+                this.selectedHost = this.allHosts[e - 1];
+                console.log(this.selectedHost);
+                this.$refs.statistics.reRender(this.allHosts[e-1], this.flowIndex);
+            }
         },
+        changeState() {
+            const now = store.state.time;
+            console.log('now:', now);
+            if (now < 30) {
+                return ;
+            } else if (now >= 30 && now < 120 && this.state === 0){
+                this.state = 1;
+                for (let i = 0; i < 2; i++) {
+                    this.nodeData.shift();
+                }
+                this.nodeData.unshift(
+                    { list: 1, id: 'h1a', ip: 'SYN Flood'},
+                    { list: 2, id: 'h1a', ip: 'Bandwidth Exhaustion attack'},
+                    { list: 3, id: 'h1a', ip: 'CPU and Memory Exhaustion'},
+                    { list: 4, id: 'h1a', ip: 'Slowloris'},
+                    { list: 5, id: 'h1b', ip: 'SYN Flood'},
+                    { list: 6, id: 'h1b', ip: 'Slowloris'},
+                );
+                for (let i = 0; i < this.nodeData.length; i++) {
+                    this.nodeData[i].list = i + 1;
+                }
+            } else if (now >= 120 && this.state === 1) {
+                this.state = 2;
+                for (let i = 0; i < 6; i++) {
+                    this.nodeData.shift();
+                }
+                this.nodeData.unshift(
+                    { list: 1, id: 'h1a', ip: '未受攻击'},
+                    { list: 2, id: 'h1b', ip: '未受攻击'},
+                );
+                for (let i = 0; i < this.nodeData.length; i++) {
+                    this.nodeData[i].list = i + 1;
+                }
+            }
+        }
     },
+    mounted() {
+        setInterval(this.changeState, 1000);
+    }
 }
 </script>
 
@@ -196,6 +237,10 @@ export default {
     border: 2px dashed rgb(9, 85, 133);
     width: 75%;
     height: 60vh;
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none;
 }
 
 .titleback{
