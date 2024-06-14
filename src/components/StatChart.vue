@@ -5,6 +5,7 @@
 <script>
 import { Chart } from '@antv/g2';
 import { toRaw } from 'vue';
+import store from '@/store/store';
 
 export default {
     name: 'StatisticsChart',
@@ -21,60 +22,45 @@ export default {
                 autoFit: true,
             });
 
-            chart.data(data);
+            const lower = store.state.time;
+            console.log('lower: ', lower);
 
-            console.log(data);
+            let new_data = [];
+            for (let i = lower; i < lower + 10 && i < 120; i++) {
+                new_data.push(data[i]);
+            }
+
+            chart.data(new_data);
 
             chart
-                .interval()
+                .area()
                 .encode('x', 'time')
                 .encode('y', 'flow')
-                .axis('y', {
-                    position: 'left',
-                    title: 'Flow',
-                    titleFill: '#fdae6b',
-                    style: {
-                        fill: '#11e9fb'
-                    },
-                    label: {
-                        textStyle: {
-                            textAlign: 'center', // 文本对齐方向，可取值为： start middle end
-                            fill: 'red', // 文本的颜色
-                            fontSize: '40px', // 文本大小
-                            autoRotate: true // 是否需要自动旋转，默认为 true
-                        }
-                    },
-                    grid: {
-                        line: {
-                            style: {
-                                stroke: '#11e9fb',
-                            lineWidth: 1,
-                            lineDash: [ 2, 2 ]
-                            }
-                        }
-                    }
-                })
-                .tooltip(false);
+                .encode('shape', 'area')
+                .style('opacity', 0.2)
 
             chart
                 .line()
                 .encode('x', 'time')
                 .encode('y', 'flow')
-                .encode('shape', 'smooth')
-                .style('stroke', '#fdae6b')
-                .style('lineWidth', 2)
-                .scale('y', { independent: true })
+                .encode('shape', 'line')
                 .axis('y', {
-                    position: 'right',
+                    position: 'left',
+                    title: 'Flow',
+                    titleFill: 'white',
+                    labelFill: 'white',
+                    gridFill: 'white'
                 })
-                .tooltip({
-                    field: 'flow'
+                .axis('x', {
+                    title: 'Time',
+                    titleFill: 'white',
+                    labelFill: 'white'
                 });
 
             chart.render();
 
             this.chart = chart;
-            }
+        }
     },
     mounted(){
         const data = [

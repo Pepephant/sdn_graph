@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import { toRaw } from 'vue';
+import store from '@/store/store'
 import TopoList from '@/components/TopoList.vue'
 import StatChart from '@/components/StatChart.vue'
 
@@ -28,7 +30,7 @@ export default {
     },
     data(){
         return{
-            flowIndex: 0,
+            index: -1,
             selectedHost: {},
             nodeData: [
                 {
@@ -201,12 +203,11 @@ export default {
     },
     methods:{
         updatehost(e){
-            this.flowIndex = 0;
             this.selectedHost = this.allHosts[e - 1];
             console.log(e - 1);
             console.log(this.allHosts[e - 1]);
             this.$refs.statistics.reRender(this.allHosts[e-1], this.flowIndex);
-        },
+        }
     },
 }
 </script>
