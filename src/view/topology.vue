@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import store from '@/store/store'
 import NetVisual from '@/components/NetVisual.vue'
 import TopoList from '@/components/TopoList.vue'
@@ -24,75 +25,6 @@ export default {
     data(){
         return{
             nodeData: [
-                { 
-                    list: 1, id: "h1a", ip:'2001:1:1::1/64'
-                },
-                { 
-                    list: 2, id: "h1b", ip:'2001:1:1::2/64'
-                },
-                { 
-                    list: 3, id: "h2a", ip:'2001:1:1::3/64'
-                },
-                { 
-                    list: 4, id: "h2b", ip:'2001:1:1::4/64'
-                },
-                { 
-                    list: 5, id: "h3a", ip:'2001:1:1::5/64'
-                },
-                { 
-                    list: 6, id: "h3b", ip:'2001:1:1::6/64'
-                },
-                { 
-                    list: 7, id: "h4a", ip:'2001:1:1::7/64'
-                },
-                { 
-                    list: 8, id: "h4b", ip:'2001:1:1::8/64'
-                },
-                { 
-                    list: 9, id: "h5a", ip:'2001:1:1::9/64'
-                },
-                { 
-                    list: 10, id: "h5b", ip:'2001:1:1::10/64'
-                },
-                { 
-                    list: 11, id: "h5c", ip:'2001:1:1::11/64'
-                },
-                { 
-                    list: 12, id: "leaf1", ip:''
-                },
-                { 
-                    list: 13, id: "leaf2", ip:''
-                },
-                { 
-                    list: 14, id: "leaf3", ip:''
-                },
-                { 
-                    list: 15, id: "leaf4", ip:''
-                },
-                { 
-                    list: 16, id: "leaf5", ip:''
-                },
-                { 
-                    list: 17, id: "spine1", ip:''
-                },
-                { 
-                    list: 18, id: "spine2", ip:''
-                },
-                { 
-                    list: 19, id: "spine3", ip:''
-                },
-                { 
-                    list: 20, id: "edge", ip:''
-                },
-                { 
-                    list: 21, id: "h6", ip:''
-                },
-                { 
-                    list: 22, id: "h7", ip:''
-                },
-                { 
-                    list: 23, id: "h8", ip:''
-                },
             ]
         }
     },
@@ -132,6 +64,14 @@ export default {
     mounted() {
         this.$refs.device_chart.scrollTop = 0;
         setInterval(this.changeState, 1000);
+
+        axios.get('/switches')
+        .then(response => {
+            this.nodeData = response.data;
+        })
+        .catch(error => {
+            console.error("There was an error fetching the node data:", error);
+        });
     },
 }
 </script>
