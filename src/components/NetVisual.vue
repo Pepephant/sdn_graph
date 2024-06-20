@@ -10,7 +10,8 @@ import { Network } from "vis-network/peer/esm/vis-network";
 export default {
     data() {
         return {
-            network: {}
+            network: {},
+            state: 0
         };
     },
     mounted() {
@@ -249,18 +250,48 @@ export default {
 
             const network = new Network(container, data, options);
             this.network = network;
+
+            // let edges_green = [1, 3, 12, 13, 17, 18, 22, 23];
+            // for (let i = 0; i < edges_green.length; i++) {
+            //     network.updateEdge(edges_green[i], {color: 'green'});
+            // }
+
             network.on("click", function(e) {
                 console.log(e);
             });
         },
         changeState() {
             const now = store.state.time;
-            if (now < 30) {
-                return ;
-            } else if (now === 30) {
-                this.network.updateEdge(1, { id: 1, from: 12, to: 1, width: 2, color: 'red' })
-            } else if (now === 120) {
-                
+            if (now >= 0 && this.state === 0) {
+                this.state = 1;
+            } else if (now >= 30 && this.state === 1) {
+                this.state = 2;
+                let edges_green = [3, 13, 18, 23];
+                for (let i = 0; i < edges_green.length; i++) {
+                    this.network.updateEdge(edges_green[i], {color: 'green'});
+                }
+                let edges_red = [27, 28, 29, 12, 17, 22, 1];
+                for (let i = 0; i < edges_red.length; i++) {
+                    this.network.updateEdge(edges_red[i], {color: 'red'});
+                }
+                let edges_orange = [9, 10, 11, 16, 21, 26];
+                for (let i = 0; i < edges_orange.length; i++) {
+                    this.network.updateEdge(edges_orange[i], {color: 'orange'});
+                }
+            } else if (now >= 70 && this.state === 2) {
+                this.state = 3;
+                let edges_red = [1];
+                for (let i = 0; i < edges_red.length; i++) {
+                    this.network.updateEdge(edges_red[i], {color: 'red'});
+                }
+                let edges_green = [1, 3, 12, 13, 17, 18, 22, 23];
+                for (let i = 0; i < edges_green.length; i++) {
+                    this.network.updateEdge(edges_green[i], {color: 'green'});
+                }
+                let edges_orange = [9, 10, 11, 16, 21, 26, 27, 28, 29];
+                for (let i = 0; i < edges_orange.length; i++) {
+                    this.network.updateEdge(edges_orange[i], {color: 'orange'});
+                }
             }
         }
     },

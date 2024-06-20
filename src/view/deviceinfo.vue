@@ -80,7 +80,14 @@ export default {
                     {'time': 106, 'flow': 15.1}, {'time': 107, 'flow': 14.9}, {'time': 108, 'flow': 15.2}, {'time': 109, 'flow': 14.8}, 
                     {'time': 110, 'flow': 15.05}, {'time': 111, 'flow': 14.95}, {'time': 112, 'flow': 15.15}, {'time': 113, 'flow': 14.85}, 
                     {'time': 114, 'flow': 15.0}, {'time': 115, 'flow': 15.1}, {'time': 116, 'flow': 14.9}, {'time': 117, 'flow': 15.2}, 
-                    {'time': 118, 'flow': 14.8}, {'time': 119, 'flow': 15.05}, {'time': 120, 'flow': 14.95}
+                    {'time': 118, 'flow': 14.8}, {'time': 119, 'flow': 15.05}, {'time': 120, 'flow': 14.95}, {'time': 121, 'flow': 14.0},
+                    {'time': 122, 'flow': 15.25}, {'time': 123, 'flow': 14.75}, {'time': 124, 'flow': 16.25}, {'time': 125, 'flow': 13.75}, 
+                    {'time': 126, 'flow': 15.0}, {'time': 127, 'flow': 15.5}, {'time': 128, 'flow': 14.5}, {'time': 129, 'flow': 16.0}, 
+                    {'time': 130, 'flow': 14.0}, {'time': 131, 'flow': 15.25}, {'time': 132, 'flow': 14.75}, {'time': 133, 'flow': 16.25},
+                    {'time': 134, 'flow': 14.75}, {'time': 135, 'flow': 16.25}, {'time': 136, 'flow': 13.75}, {'time': 137, 'flow': 15.0}, 
+                    {'time': 138, 'flow': 15.5}, {'time': 139, 'flow': 14.5}, {'time': 140, 'flow': 16.0}, {'time': 141, 'flow': 14.0}, 
+                    {'time': 142, 'flow': 15.25}, {'time': 143, 'flow': 14.75}, {'time': 144, 'flow': 16.25}, {'time': 145, 'flow': 13.75}, 
+                    {'time': 146, 'flow': 15.0}, {'time': 147, 'flow': 15.5}, {'time': 148, 'flow': 14.5}, {'time': 149, 'flow': 16.0},  
                 ],
                 [
                     {'time': 30, 'flow': 4.0}, {'time': 31, 'flow': 5.0}, {'time': 32, 'flow': 6.0}, {'time': 33, 'flow': 7.0}, 
@@ -130,7 +137,14 @@ export default {
                     {'time': 106, 'flow': 75.5}, {'time': 107, 'flow': 74.5}, {'time': 108, 'flow': 76.0}, {'time': 109, 'flow': 74.0}, 
                     {'time': 110, 'flow': 75.25}, {'time': 111, 'flow': 74.75}, {'time': 112, 'flow': 76.25}, {'time': 113, 'flow': 73.75}, 
                     {'time': 114, 'flow': 75.0}, {'time': 115, 'flow': 75.5}, {'time': 116, 'flow': 74.5}, {'time': 117, 'flow': 76.0}, 
-                    {'time': 118, 'flow': 74.0}, {'time': 119, 'flow': 75.25}, {'time': 120, 'flow': 74.75}
+                    {'time': 118, 'flow': 74.0}, {'time': 119, 'flow': 75.25}, {'time': 120, 'flow': 74.75}, {'time': 121, 'flow': 74.0},
+                    {'time': 122, 'flow': 75.25}, {'time': 123, 'flow': 74.75}, {'time': 124, 'flow': 76.25}, {'time': 125, 'flow': 73.75}, 
+                    {'time': 126, 'flow': 75.0}, {'time': 127, 'flow': 75.5}, {'time': 128, 'flow': 74.5}, {'time': 129, 'flow': 76.0}, 
+                    {'time': 130, 'flow': 74.0}, {'time': 131, 'flow': 75.25}, {'time': 132, 'flow': 74.75}, {'time': 133, 'flow': 76.25},
+                    {'time': 134, 'flow': 74.75}, {'time': 135, 'flow': 76.25}, {'time': 136, 'flow': 73.75}, {'time': 137, 'flow': 75.0}, 
+                    {'time': 138, 'flow': 75.5}, {'time': 139, 'flow': 74.5}, {'time': 140, 'flow': 76.0}, {'time': 141, 'flow': 74.0}, 
+                    {'time': 142, 'flow': 75.25}, {'time': 143, 'flow': 74.75}, {'time': 144, 'flow': 76.25}, {'time': 145, 'flow': 73.75}, 
+                    {'time': 146, 'flow': 75.0}, {'time': 147, 'flow': 75.5}, {'time': 148, 'flow': 74.5}, {'time': 149, 'flow': 76.0},  
                 ],
                 [
                     {'time': 30, 'flow': 4.0}, {'time': 31, 'flow': 5.0}, {'time': 32, 'flow': 6.0}, {'time': 33, 'flow': 7.0}, 
@@ -179,7 +193,7 @@ export default {
                 return ;
             } else if (now >= 30 && now < 120 && this.state === 0){
                 this.state = 1;
-                for (let i = 0; i < 2; i++) {
+                for (let i = 0; i < 1; i++) {
                     this.nodeData.shift();
                 }
                 this.nodeData.unshift(
@@ -187,20 +201,17 @@ export default {
                     { list: 2, id: 'h1a', ip: 'Bandwidth Exhaustion attack'},
                     { list: 3, id: 'h1a', ip: 'CPU and Memory Exhaustion'},
                     { list: 4, id: 'h1a', ip: 'Slowloris'},
-                    { list: 5, id: 'h1b', ip: 'SYN Flood'},
-                    { list: 6, id: 'h1b', ip: 'Slowloris'},
                 );
                 for (let i = 0; i < this.nodeData.length; i++) {
                     this.nodeData[i].list = i + 1;
                 }
             } else if (now >= 120 && this.state === 1) {
                 this.state = 2;
-                for (let i = 0; i < 6; i++) {
+                for (let i = 0; i < 4; i++) {
                     this.nodeData.shift();
                 }
                 this.nodeData.unshift(
                     { list: 1, id: 'h1a', ip: '未受攻击'},
-                    { list: 2, id: 'h1b', ip: '未受攻击'},
                 );
                 for (let i = 0; i < this.nodeData.length; i++) {
                     this.nodeData[i].list = i + 1;
