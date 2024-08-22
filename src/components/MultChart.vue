@@ -15,7 +15,7 @@ export default {
         }
     },
     methods: {
-        reRender(data) {
+        reRender(all_data, types) {
             const chart = new Chart({
                 container: 'chart',
                 autoFit: true,
@@ -24,18 +24,23 @@ export default {
             const lower = store.state.time;
             console.log('lower: ', lower);
 
-            let new_datas = [];
             const now = new Date();
 
-            for (let i = lower, j = 10; i < lower + 10 && i < 144; i++, j--) {
-                const new_flow = data[i].flow;
-                const time = new Date(now.getTime() - j * 1000);
-                const hours = String(time.getHours()).padStart(2, '0');
-                const minutes = String(time.getMinutes()).padStart(2, '0');
-                const seconds = String(time.getSeconds()).padStart(2, '0');
-                const new_time = `${hours}:${minutes}:${seconds}`;
-                let new_data = { 'time': new_time, 'flow': new_flow};
-                new_datas.push(new_data);
+            let new_datas = [];
+
+            for (let index = 0; index < all_data.length; index++) {
+                const data = all_data[index];
+
+                for (let i = lower, j = 10; i < lower + 10 && i < 144; i++, j--) {
+                    const new_flow = data[i].flow;
+                    const time = new Date(now.getTime() - j * 1000);
+                    const hours = String(time.getHours()).padStart(2, '0');
+                    const minutes = String(time.getMinutes()).padStart(2, '0');
+                    const seconds = String(time.getSeconds()).padStart(2, '0');
+                    const new_time = `${hours}:${minutes}:${seconds}`;
+                    let new_data = { 'time': new_time, 'flow': new_flow, 'type': types[index].id};
+                    new_datas.push(new_data);
+                }
             }
 
             chart.data(new_datas);
@@ -47,12 +52,19 @@ export default {
                 .encode('x', 'time')
                 .encode('y', 'flow')
                 .encode('shape', 'area')
+                .encode('color', 'type')
                 .style('opacity', 0.2)
+                .legend(false)
+                .scale('color', {
+                    type: 'ordinal',
+                    range: ['#adff2f', '#d87093', '#ff6347', '#fafad2', '#00ced1', '#7fffd4'],
+                });
 
             chart
                 .line()
                 .encode('x', 'time')
                 .encode('y', 'flow')
+                .encode('color', 'type')
                 .encode('shape', 'line')
                 .axis('y', {
                     position: 'left',
@@ -67,7 +79,7 @@ export default {
                     labelFill: 'white',
                     labelTransform: 'rotate(30deg)'
                 });
-                
+
             chart.render();
 
             this.chart = chart;

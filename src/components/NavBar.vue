@@ -19,6 +19,12 @@
                     链路信息
                 </router-link>
             </li>
+            <li class="nav-li" :class="{'chosen': chosen == 3, 'unchosen': chosen != 3}"
+            @click="this.chosen = 3">
+                <router-link :to="{ name: 'cleantraffic'}" class="page-link">
+                    清洗信息
+                </router-link>
+            </li>
         </ul>
     </nav>
 </template>

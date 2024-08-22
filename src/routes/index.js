@@ -3,6 +3,7 @@ import {createRouter, createWebHistory} from "vue-router";
 const Topology = () => import('@/view/topology')
 const Deviceinfo = () => import('@/view/deviceinfo')
 const Linkinfo = () => import('@/view/linkinfo')
+const Cleantraffic = () => import("@/view/cleantraffic.vue")
  
 const routes = [
     {
@@ -24,6 +25,11 @@ const routes = [
         path: '/linkinfo',
         name: 'linkinfo',
         component: Linkinfo
+    },
+    {
+        path: '/cleantraffic',
+        name: 'cleantraffic',
+        component: Cleantraffic
     }
 ]
  
